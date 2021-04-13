@@ -1,0 +1,71 @@
+TH HSH (1) "13 April 2021"
+NAME
+     hsh — command interpreter (shell)
+
+SYNOPSIS
+    .B ./hsh 
+    [command] [options]
+
+DESCRIPTION
+    hsh is a mini command interpreter for the system. This version has many features which make it appear similar a sh.
+    hsh a linux-compatible command language interpreter that executes commands read from the standard input or from a file.
+
+Overview
+    The hsh is a command that reads lines from either a file or the terminal, interprets them, and generally executes other commands.
+    It is the program that is running when a user put in this terminal ./hsh. .  It incorporates many features to aid interactive use 
+    and has the advantage that the interpretative language is common to both interactive and non-interactive use (shell scripts).
+    That is, commands can be typed directly to the running shell or can be put into a file and the file can be executed directly by the shell.
+
+Invocation
+    If no args are present the mini shell i considered an interactive mini shell.  
+    the interactive mini shell generally prompts before each command and handles programming and command errors differently. 
+    When first starting, the mini shell inspects argument 0.  Therefore, a user should place commands that are to be executed.
+    If command line arguments , then the mini shell treats the first argument as the name of a file from which to read commands 0
+    and the remaining arguments are set as the positional parameters of the mini shell.
+    The user may quit the program by typing "exit", or "Ctrl + D" on the command line. When the program quits or a command has been 
+    executed, returns with a new prompt: "$ ".
+  
+Search and Execution
+    When a normal program is executed, the shell runs the program, passing the arguments and the environment to the program. 
+
+Path Search
+     When locating a command, the shell first looks to see if it has a shell function by that name.  Then it looks for a builtin 
+     command by that name.  If a builtin command is not found, one things happen:
+
+    1.  The shell searches each entry in PATH in turn for the command.  The value of the PATH variable should be a series of entries 
+        separated by colons.
+
+EXAMPLE
+    $./hsh
+      $pwd
+      /home/vagrant/simple_shell
+      $
+      $/bin/pwd
+      /home/vagrant/simple_shell
+      $
+
+RESERVED WORDS
+      exit: quits the program, exits the shell.
+  
+      env: prints the environment variables
+
+FILES
+
+      prompt.c - Contains the int main(void) function, entry point.
+
+      aux_funtions.c - It contains two funtions in charge of tokenize and a file in charge of freeing the memory of the double pointers:
+      num_tokens, free_memory, tokenize.
+
+      string_funtions.c - contains functions related to strings:
+      _strlen, _strcmp, _strcat, _strncmp, _strdup.
+
+      errors.c - contains related functions fork and the error message:
+      fork_fail, end_of_line, _forkexe, _forkwait.
+
+      environment.c - Contains all functions that handle environment/path:
+      tokenize_env, exe_path, print_env, env_command. 
+
+AUTHORS
+Carolina Ramón Palacio, Juan Camilo Cadavid Velásquez.
+
+    

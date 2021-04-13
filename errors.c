@@ -57,7 +57,6 @@ void _forkexe(char *buffer, char **argv, char **environ)
 * _forkwait - Function that waits for processes to be finished.
 * @buffer: Buffer.
 * @argv: Commands.
-* @environ: Global variable containing.
 * Return: Returns 1 on success or 0 if it fails to execute.
 */
 void _forkwait(char *buffer, char **argv)

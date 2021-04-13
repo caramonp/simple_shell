@@ -84,6 +84,11 @@ int _strncmp(const char *s1, const char *s2, size_t n)
 	}
 }
 
+/**
+* _strdup - Duplicate a string.
+* @str1: string to be duplicated.
+* Return: Returns a pointer that points to the copy of str1.
+*/
 char *_strdup(char *str1)
 {
 	int i, j;

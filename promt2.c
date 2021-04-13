@@ -1,15 +1,14 @@
-	#include "holberton.h"
+#include "holberton.h"
 /**
 * main - prompts the user for commands.
 *
 * Return: Returns 1 on success and 0 if it fails.
 */
-
-	int main(void)
-	{
+int main(void)
+{
 	char *buffer = NULL, **argv = NULL;
 	size_t bufsize = 0;
-  	int characters = 0;
+	int characters = 0;
 	int status, count = 0;
 	pid_t child;
 
@@ -32,7 +31,7 @@
 					if (child == -1)
 						fork_fail();
 					if (child == 0)
-						_forkexe(buffer, argv, environ);
+						_forkexe(buffer, argv, environ, count);
 					else
 					{
 					wait(&status);
@@ -41,11 +40,10 @@
 					count++;
 			}
 	if (characters == EOF)
-		
+
 		end_of_line(buffer, argv);
 		buffer = NULL;
 		free(buffer);
 		free_memory(argv);
 		return (EXIT_SUCCESS);
-		
-	}
+}

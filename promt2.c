@@ -9,7 +9,7 @@ int main(void)
 	char *buffer = NULL, **argv = NULL;
 	size_t bufsize = 0;
 	int characters = 0;
-	int status, count = 0;
+	int status;
 	pid_t child;
 
 		while (characters != EOF)
@@ -37,7 +37,6 @@ int main(void)
 					wait(&status);
 					_forkwait(buffer, argv);
 					}
-					count++;
 			}
 	if (characters == EOF)
 

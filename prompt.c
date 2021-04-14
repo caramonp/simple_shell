@@ -14,16 +14,18 @@ int main(void)
 
 		while (characters != EOF)
 		{
-			if (isatty(STDIN_FILENO))
-			write(STDIN_FILENO, "$ ", 2);
+			write(STDIN_FILENO, "promt$", 7);
 
 			characters = getline(&buffer, &bufsize, stdin);
-			if (characters == EOF)
-				{
-				free(buffer);
+			if (characters == -1)
 				return (-1);
-				}
 			*(buffer + characters - 1) =  '\0';
+				if (characters == EOF)
+				{
+					if (isatty(STDIN_FILENO))
+						read(STDOUT_FILENO, &buffer, bufsize);
+					exit(0);
+				}
 					argv = tokenize(buffer);
 					child = fork();
 					if (child == -1)
@@ -39,9 +41,9 @@ int main(void)
 	if (characters == EOF)
 		{
 		end_of_line(buffer, argv);
+		}
 		buffer = NULL;
 		free(buffer);
 		free_memory(argv);
 		return (EXIT_SUCCESS);
-		}
 }

@@ -12,24 +12,21 @@ int main(void)
 	int status;
 	pid_t child;
 
-		while (characters != EOF)
+  if (isatty(STDIN_FILENO))
+				write(STDIN_FILENO, "$ ", 2);
+
+		while ((characters = getline(&buffer, &bufsize, stdin)))
 		{
 			if (isatty(STDIN_FILENO))
 				write(STDIN_FILENO, "$ ", 2);
 
-			characters = getline(&buffer, &bufsize, stdin);
 			if (characters == -1)
 				{
 				free(buffer);
 				return (-1);
 				}
 			*(buffer + characters - 1) =  '\0';
-				if (characters == EOF)
-				{
-					if (isatty(STDIN_FILENO))
-						read(STDOUT_FILENO, &buffer, bufsize);
-					exit(0);
-				}
+
 					argv = tokenize(buffer);
 					child = fork();
 					if (child == -1)
@@ -42,8 +39,6 @@ int main(void)
 					_forkwait(buffer, argv);
 					}
 			}
-  if (isatty(STDIN_FILENO))
-				write(STDIN_FILENO, "$ ", 2);
 
 	if (characters == EOF)
 		{

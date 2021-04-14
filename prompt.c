@@ -14,11 +14,15 @@ int main(void)
 
 		while (characters != EOF)
 		{
-			write(STDIN_FILENO, "promt$", 7);
+			if (isatty(STDIN_FILENO))
+				write(STDIN_FILENO, "$ ", 2);
 
 			characters = getline(&buffer, &bufsize, stdin);
 			if (characters == -1)
+				{
+				free(buffer);
 				return (-1);
+				}
 			*(buffer + characters - 1) =  '\0';
 				if (characters == EOF)
 				{

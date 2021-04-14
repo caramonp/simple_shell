@@ -33,5 +33,6 @@ void _forkexe(char *buffer, char **argv, char **environ);
 void _forkwait(char *buffer, char **argv);
 void end_of_line(char *buffer, char **argv);
 char *_strdup(char *str1);
+char *_strcpy(char *dest, char *src);
 
 #endif

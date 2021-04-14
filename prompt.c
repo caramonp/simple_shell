@@ -42,6 +42,9 @@ int main(void)
 					_forkwait(buffer, argv);
 					}
 			}
+  if (isatty(STDIN_FILENO))
+				write(STDIN_FILENO, "$ ", 2);
+
 	if (characters == EOF)
 		{
 		end_of_line(buffer, argv);

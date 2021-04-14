@@ -28,7 +28,7 @@ char *tokenize_env(char *comando, char **environ);
 char *_strcat(char *dest, char *src);
 int _strncmp(const char *s1, const char *s2, size_t n);
 void env_command(char *buffer, char **argv, char **environ);
-int fork_fail(void);
+int fork_fail(char *buffer, char **argv);
 void _forkexe(char *buffer, char **argv, char **environ);
 void _forkwait(char *buffer, char **argv);
 void end_of_line(char *buffer, char **argv);

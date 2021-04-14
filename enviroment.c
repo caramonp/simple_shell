@@ -15,21 +15,32 @@ static char *box;
 
 	for (i = 0; environ[i] != NULL; i++)
 		if (_strncmp(environ[i], "PATH=", 5) == 0)
+			{
 			break;
-	tmp = _strdup(environ[i]);/**crear la funcion **/
+			}
+	tmp = _strdup(environ[i]);
 	token = strtok(tmp, ":");
 	for (i = 0; token != NULL; i++)
 	{
 		box = malloc((_strlen(token) + _strlen(comando) + 2) * sizeof(char));
+		if (box == NULL)
+		{
+			free(box);
+			free(tmp);
+			return (NULL);
+		}
 		_strcat(box, token);
 		if (box[i - 1] != '/')
+		{
 			_strcat(box, "/");
 		_strcat(box, comando);
 		str = stat(box, &stapath);
+		}
 		if (str == 0)
-	{
+		{
+			free(tmp);
 			return (box);
-	}
+		}
 		token = strtok(NULL, ":");
 	}
 free(box);
@@ -56,6 +67,8 @@ void exe_path(char **argv, char **environ)
 	if (i == -1)
 	{
 	perror("Error");
+	free_memory(argv);
+	exit(EXIT_SUCCESS);
 	}
 	free_memory(argv);
 	exit(EXIT_SUCCESS);

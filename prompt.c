@@ -12,40 +12,37 @@ int main(void)
 	int status;
 	pid_t child;
 
-  if (isatty(STDIN_FILENO))
-				write(STDIN_FILENO, "$ ", 2);
+if (isatty(STDIN_FILENO))
+	write(STDIN_FILENO, "$ ", 2);
 
-		while ((characters = getline(&buffer, &bufsize, stdin)))
-		{
-			if (isatty(STDIN_FILENO))
-				write(STDIN_FILENO, "$ ", 2);
-
-			if (characters == -1)
-				{
-				free(buffer);
-				return (-1);
-				}
-			*(buffer + characters - 1) =  '\0';
-
-					argv = tokenize(buffer);
-					child = fork();
-					if (child == -1)
-						fork_fail();
-					if (child == 0)
-						_forkexe(buffer, argv, environ);
-					else
-					{
-					wait(&status);
-					_forkwait(buffer, argv);
-					}
-			}
-
-	if (characters == EOF)
-		{
-		end_of_line(buffer, argv);
-		}
-		buffer = NULL;
+while ((characters = getline(&buffer, &bufsize, stdin)))
+{
+	if (characters == -1)
+	{
 		free(buffer);
-		free_memory(argv);
-		return (EXIT_SUCCESS);
+		return (-1);
+	}
+	*(buffer + characters - 1) =  '\0';
+	argv = tokenize(buffer);
+	child = fork();
+	if (child == -1)
+		fork_fail(buffer, argv);
+	if (child == 0)
+		_forkexe(buffer, argv, environ);
+	else
+	{
+		wait(&status);
+		_forkwait(buffer, argv);
+	}
+	buffer = NULL;
+	if (isatty(STDIN_FILENO))
+		write(STDIN_FILENO, "$ ", 2);
+}
+if (characters == EOF)
+{
+	end_of_line(buffer, argv);
+}
+free(buffer);
+free_memory(argv);
+return (EXIT_SUCCESS);
 }

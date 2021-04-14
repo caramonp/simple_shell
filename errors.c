@@ -1,10 +1,14 @@
 #include "holberton.h"
 /**
 * fork_fail - if fork fails, shows error.
+*@buffer: buffer
+*@argv: argument
 * Return: Returns 1.
 */
-int fork_fail(void)
+int fork_fail(char *buffer, char **argv)
 {
+	free(buffer);
+	free_memory(argv);
 	perror("Error:");
 	return (1);
 }
@@ -36,21 +40,26 @@ void _forkexe(char *buffer, char **argv, char **environ)
 
 	if (argv == NULL)
 	{
-		free(buffer); /*Comando es nulo*/
+		free_memory(argv);
+		free(buffer);
 		exit(0);
 	}
-		else if (_strcmp(_salida, argv[0]))
-		{
-			free(buffer);
-			free_memory(argv);
-			exit(0);
-		}
-		else if (_strcmp(argv[0], environment_command))
-			env_command(buffer, argv, environ);
-		else if (stat(argv[0], &statbuf) == 0)
-			execve(argv[0], argv, environ);
-		else
-			exe_path(argv, environ);
+	else if (_strcmp(_salida, argv[0]))
+	{
+		free(buffer);
+		free_memory(argv);
+		exit(0);
+	}
+	else if (_strcmp(argv[0], environment_command))
+	env_command(buffer, argv, environ);
+	else if (stat(argv[0], &statbuf) == 0)
+	{
+		execve(argv[0], argv, environ);
+		free(buffer);
+		free_memory(argv);
+	}
+	else
+	exe_path(argv, environ);
 }
 
 /**
@@ -65,15 +74,18 @@ void _forkwait(char *buffer, char **argv)
 
 	if (_strcmp(_salida, argv[0]))
 	{
-		free(buffer); /*Comando es exit*/
+		free(buffer);
 		free_memory(argv);
 		exit(0);
 	}
 	else if (argv == NULL)
 	{
-		free(buffer); /*Comando es nulo.*/
+		free(buffer);
 		exit(0);
 	}
-		else
-		free_memory(argv);
+	else
+	{
+	free(buffer);
+	free_memory(argv);
+	}
 }

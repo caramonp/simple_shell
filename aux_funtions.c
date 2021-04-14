@@ -7,11 +7,8 @@
 
 unsigned int num_tokens(char *tok)
 {
-	unsigned int argv, i, count;
+	unsigned int argv = 0, i = 0, count = 0;
 
-	count = 0;
-	argv = 0;
-	i = 0;
 	while (tok[i] != '\0')
 	{
 		if (tok[i] != ' ')
@@ -63,38 +60,41 @@ void free_memory(char **mem)
 char **tokenize(char *str)
 {
 	char **argv = NULL;
-	char *token;
-	unsigned int tokens;
+	char *token = NULL;
+	unsigned int tokens = 0;
 	int i = 0;
 
 	tokens = num_tokens(str);
 
 	argv = malloc((sizeof(char *)) * (tokens + 1));
 	if (argv == NULL)
-		{
+	{
+		free_memory(argv);
 		return (NULL);
-		}
-
+	}
 		token = strtok(str, " \t\n\r");
-		if (token == NULL)
-		{
-			free(str);
-			return (NULL);
-		}
-		while (token != NULL)
-		{
-			argv[i] = malloc(_strlen(token) + 1);
+	if (token == NULL)
+	{
+		free(str);
+		free_memory(argv);
+		return (NULL);
+	}
+	while (token != NULL)
+	{
+		argv[i] = malloc(_strlen(token) + 1);
 
-				if (argv[i] == NULL)
-				{
-					free_memory(argv);
-					return (NULL);
-
-				}
-				_strcpy(argv[i], token);
-				token = strtok(NULL, " \t\n\r");
-				i++;
+			if (argv[i] == NULL)
+			{
+				free(str);
+				free(argv[i]);
+				free_memory(argv);
+				return (NULL);
 			}
+
+			_strcpy(argv[i], token);
+			token = strtok(NULL, " \t\n\r");
+			i++;
+	}
 	argv[i] = NULL;
 	return (argv);
 
@@ -110,7 +110,7 @@ char **tokenize(char *str)
 
 char *_strcpy(char *dest, char *src)
 {
-	int iter;
+	int iter = 0;
 
 	for (iter = 0; src[iter] != '\0'; iter++)
 	{

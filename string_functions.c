@@ -7,7 +7,7 @@
 */
 int _strlen(char *str)
 {
-	int i;
+	int i = 0;
 
 	for (i = 0; str[i] != '\0'; i++)
 	{
@@ -47,8 +47,8 @@ int _strcmp(char *str1, char *str2)
 char *_strcat(char *dest, char *src)
 
 {
-int i, j;
-i = 0;
+int i = 0, j = 0;
+
 while (dest[i] != '\0')
 i++;
 for (j = 0; src[j] != '\0'; j++)
@@ -91,8 +91,8 @@ int _strncmp(const char *s1, const char *s2, size_t n)
 */
 char *_strdup(char *str1)
 {
-	int i, j;
-	char *str2;
+	int i = 0, j = 0;
+	char *str2 = NULL;
 
 	if (str1 == NULL)
 	{

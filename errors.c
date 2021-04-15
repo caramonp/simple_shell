@@ -30,6 +30,7 @@ void end_of_line(char *buffer, char **argv)
 * @buffer: Buffer.
 * @argv: Commands.
 * @environ: Global variable containing.
+* @count: Counter for command number.
 * Return: Returns 1 on success or 0 if it fails to execute.
 */
 void _forkexe(char *buffer, char **argv, char **environ, int count)

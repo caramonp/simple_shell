@@ -52,6 +52,7 @@ return (comando);
 * exe_path - this function executes the commands passed to it.
 * @argv: Commands passed to our prompt.
 * @environ: Global variable that contains enviroment.
+* @count: Counts the command number.
 * Return: Doesn't return.
 */
 

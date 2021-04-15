@@ -85,8 +85,8 @@ void print_env(char **enviroment)
 	while (enviroment[i])
 	{
 	j = _strlen(enviroment[i]); /** Tamaño**/
-	write(STDIN_FILENO, enviroment[i], j);
-	write(STDIN_FILENO, "\n", 1);
+	write(STDOUT_FILENO, enviroment[i], j);
+	write(STDOUT_FILENO, "\n", 1);
 	i++;
 	}
 }

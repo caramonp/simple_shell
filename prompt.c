@@ -13,16 +13,15 @@ int main(void)
 	pid_t child;
 
 if (isatty(STDIN_FILENO))
-	write(STDIN_FILENO, "$ ", 2);
+	write(STDOUT_FILENO, "$ ", 2);
 
 while ((characters = getline(&buffer, &bufsize, stdin)))
 {
 	if (characters == -1)
 	{
 		free(buffer);
-		return (-1);
+		return (0);
 	}
-
 	*(buffer + characters - 1) =  '\0';
 	++count;
 	argv = tokenize(buffer);
@@ -38,7 +37,7 @@ while ((characters = getline(&buffer, &bufsize, stdin)))
 	}
 	buffer = NULL;
 	if (isatty(STDIN_FILENO))
-		write(STDIN_FILENO, "$ ", 2);
+		write(STDOUT_FILENO, "$ ", 2);
 }
 if (characters == EOF)
 {

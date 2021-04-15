@@ -11,7 +11,7 @@ We've developed a simple command interpreter as our final C project, in this rep
  - **enviroment.c** This file contains the functions needed for printing the enviroment, tokenizing the enviroment and running executables found in the PATH.
  - **errors.c** This file contains the functions used for printing out errors and the funcions we used to split the fork and wait process.
  - **string_functions.c** This file contains the functions we used to manipulate strings in our program.
- - **error_mess.c.c** This file contains the function we use to display an error message when the command isn't found.
+ - **error_mess.c** This file contains the function we use to display an error message when the command isn't found.
 
 ## Requirements ⚙️
 

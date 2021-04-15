@@ -13,8 +13,7 @@
 
 extern char **environ;
 
-int main(void);
-int strcopy(char *str1, char *str2, size_t t);
+char *_strcpy(char *dest, char *src);
 int _pstring(char *str);
 int _strcmp(char *s1, char *s2);
 char **tokenize(char *str);

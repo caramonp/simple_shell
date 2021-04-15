@@ -9,7 +9,7 @@ int main(void)
 	char *buffer = NULL, **argv = NULL;
 	size_t bufsize = 0;
 	int characters = 0;
-	int status;
+	int status, count = 0;
 	pid_t child;
 
 if (isatty(STDIN_FILENO))
@@ -22,13 +22,15 @@ while ((characters = getline(&buffer, &bufsize, stdin)))
 		free(buffer);
 		return (-1);
 	}
+
 	*(buffer + characters - 1) =  '\0';
+	++count;
 	argv = tokenize(buffer);
 	child = fork();
 	if (child == -1)
 		fork_fail(buffer, argv);
 	if (child == 0)
-		_forkexe(buffer, argv, environ);
+		_forkexe(buffer, argv, environ, count);
 	else
 	{
 		wait(&status);

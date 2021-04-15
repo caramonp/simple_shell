@@ -55,7 +55,7 @@ return (comando);
 * Return: Doesn't return.
 */
 
-void exe_path(char **argv, char **environ)
+void exe_path(char **argv, char **environ, int count)
 {
 	int i = 0;
 	char *directories = NULL;
@@ -66,7 +66,7 @@ void exe_path(char **argv, char **environ)
 	i = execve(argv[0], argv, NULL);
 	if (i == -1)
 	{
-	perror("Error");
+	print_error(argv, argv[0], count);
 	free_memory(argv);
 	exit(EXIT_SUCCESS);
 	}

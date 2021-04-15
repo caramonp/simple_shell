@@ -22,7 +22,7 @@ void end_of_line(char *buffer, char **argv)
 {
 	free(buffer);
 	free_memory(argv);
-	exit(0);
+	exit(EXIT_SUCCESS);
 }
 
 /**
@@ -32,7 +32,7 @@ void end_of_line(char *buffer, char **argv)
 * @environ: Global variable containing.
 * Return: Returns 1 on success or 0 if it fails to execute.
 */
-void _forkexe(char *buffer, char **argv, char **environ)
+void _forkexe(char *buffer, char **argv, char **environ, int count)
 {
 	char *_salida = "exit";
 	char *environment_command = "env";
@@ -42,13 +42,13 @@ void _forkexe(char *buffer, char **argv, char **environ)
 	{
 		free_memory(argv);
 		free(buffer);
-		exit(0);
+		exit(EXIT_SUCCESS);
 	}
 	else if (_strcmp(_salida, argv[0]))
 	{
 		free(buffer);
 		free_memory(argv);
-		exit(0);
+		exit(EXIT_SUCCESS);
 	}
 	else if (_strcmp(argv[0], environment_command))
 	env_command(buffer, argv, environ);
@@ -59,7 +59,7 @@ void _forkexe(char *buffer, char **argv, char **environ)
 		free_memory(argv);
 	}
 	else
-	exe_path(argv, environ);
+	exe_path(argv, environ, count);
 }
 
 /**
@@ -76,12 +76,12 @@ void _forkwait(char *buffer, char **argv)
 	{
 		free(buffer);
 		free_memory(argv);
-		exit(0);
+		exit(EXIT_SUCCESS);
 	}
 	else if (argv == NULL)
 	{
 		free(buffer);
-		exit(0);
+		exit(EXIT_SUCCESS);
 	}
 	else
 	{

@@ -23,16 +23,18 @@ unsigned int num_tokens(char *tok);
 void free_memory(char **mem);
 int _fork(char **comm);
 int _strcmp(char *str1, char *str2);
-void exe_path(char **argv, char **environ);
+void exe_path(char **argv, char **environ, int count);
 char *tokenize_env(char *comando, char **environ);
 char *_strcat(char *dest, char *src);
 int _strncmp(const char *s1, const char *s2, size_t n);
 void env_command(char *buffer, char **argv, char **environ);
 int fork_fail(char *buffer, char **argv);
-void _forkexe(char *buffer, char **argv, char **environ);
+void _forkexe(char *buffer, char **argv, char **environ, int count);
 void _forkwait(char *buffer, char **argv);
 void end_of_line(char *buffer, char **argv);
 char *_strdup(char *str1);
 char *_strcpy(char *dest, char *src);
+void print_error(char **argv, char *comando, int count);
+int _putchar(char c);
 
 #endif
